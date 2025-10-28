@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  sftp-ingestor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ziflo-sftp-ingestor
+    volumes:
+      # Mount the directory to observe (change this path as needed)
+      - ./watch_directory:/app/watch_directory:rw
+      # Mount the source code for development (optional)
+    environment:
+      - WATCH_DIRECTORY=/app/watch_directory
+    restart: unless-stopped
