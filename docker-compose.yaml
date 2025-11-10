@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   sftp-ingestor:
     build:
@@ -7,9 +5,16 @@ services:
       dockerfile: Dockerfile
     container_name: ziflo-sftp-ingestor
     volumes:
+      - ./secrets:/app/secrets:ro
       # Mount the directory to observe (change this path as needed)
       - ./watch_directory:/app/watch_directory:rw
+      # Mount the output directory for development only
+      - ./out_directory:/app/out_directory:rw
       # Mount the source code for development (optional)
     environment:
       - WATCH_DIRECTORY=/app/watch_directory
+      - OUT_DIRECTORY=/app/out_directory
+      - BUCKET_NAME=${BUCKET_NAME}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/elisa-467011-da778da0ac83.json
+      - PROJECT_ID=elisa-467011
     restart: unless-stopped
