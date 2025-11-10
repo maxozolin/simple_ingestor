@@ -6,6 +6,9 @@ secrets/*
 
 .venv/
 
+watch_directory/
+out_directory/
+
 # Python
 __pycache__/*
 *.pyc
