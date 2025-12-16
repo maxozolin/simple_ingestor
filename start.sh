@@ -58,7 +58,7 @@ while true; do
     # Check if there are any files in the watch directory
     if [ -n "$(find "$WATCH_DIR" -type f -name "*" 2>/dev/null | head -1)" ]; then
         echo "Files found in watch directory, moving to GCS..."
-        if ! gsutil $EXTRA_ARGS -m mv "$WATCH_DIR/*" "gs://$BUCKET_NAME/"; then
+        if ! gsutil $EXTRA_ARGS -m mv "${WATCH_DIR}/" "gs://${BUCKET_NAME}/"; then
             echo "ERROR: Failed to move files to GCS. Files remain in watch directory."
         fi
     else
